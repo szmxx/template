@@ -1,7 +1,7 @@
 /*
  * @Author: weicong
  * @Date: 2021-03-02 16:42:52
- * @LastEditTime: 2021-03-22 15:59:08
+ * @LastEditTime: 2021-03-23 09:15:40
  * @LastEditors: weicong
  * @Description:
  */
@@ -50,16 +50,23 @@ module.exports = {
       .test(/\.(png|jpe?g|gif|webp|svg)(\?.*)?$/)
       .exclude.add(resolve("src/svg"))
       .end();
-    if (process.env.NODE_ENV === "production") {
-      config.plugin("CompressionPlugin").use(CompressionPlugin, [
-        {
-          filename: "[path].gz[query]",
-          algorithm: "gzip",
-          test: new RegExp("\\.(" + productionGzipExtensions.join("|") + ")$"),
-          threshold: 10240,
-          minRatio: 0.8,
-        },
-      ]);
-    }
+  },
+  // webpack 4,compress version should lower 5.0.1
+  // https://github.com/webpack-contrib/compression-webpack-plugin/issues/223
+  configureWebpack: {
+    plugins:
+      process.env.NODE_ENV === "production"
+        ? [
+            new CompressionPlugin({
+              filename: "[path].gz[query]",
+              algorithm: "gzip",
+              test: new RegExp(
+                "\\.(" + productionGzipExtensions.join("|") + ")$"
+              ),
+              threshold: 10240,
+              minRatio: 0.8,
+            }),
+          ]
+        : [],
   },
 };

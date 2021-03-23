@@ -1,29 +1,10 @@
 # template
 
-## Project setup
-```
-yarn install
-```
+练习 项目脚手架模板
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- vue
+- svg
+- scss
+- view-design
+- vue-router
+- vuex
